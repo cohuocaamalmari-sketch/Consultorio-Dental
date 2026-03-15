@@ -543,7 +543,8 @@
         
         /* INSTRUCCIONES PARA CONECTAR REALMENTE CON GOOGLE SHEETS:
            1. Ve a Google Drive -> Nuevo -> Google Sheets.
-           2. Crea las columnas: Timestamp, Nombre, Telefono, Email, Fecha, Servicio, Mensaje.
+           2. Crea los siguientes encabezados en la Fila 1 (A1, B1, C1...):
+              Timestamp | Nombre | Telefono | Email | Fecha | Servicio | Mensaje
            3. Extensiones -> Apps Script.
            4. Pega este código en el script:
               
@@ -567,7 +568,7 @@
            7. Copia la "URL de la aplicación web" y pégala abajo en la variable SCRIPT_URL.
         */
 
-        // >>> REEMPLAZA ESTA URL CON TU URL DE APPS SCRIPT <<<
+        // >>> REEMPLAZA ESTA URL CON TU URL DE APPS SCRIPT REAL <<<
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxecBeAhmDIeT62v7rJAm-X6pYjxNxeiPxRODOu094f1VgyH4-AhAnH_C81HlxsjKPk/exec"; 
 
         const form = document.getElementById('appointment-form');
@@ -585,36 +586,31 @@
             // Recopilar datos del formulario
             const formData = new FormData(form);
 
-            // SIMULACIÓN O ENVÍO REAL
-            // Si has configurado el SCRIPT_URL real, descomenta el bloque fetch de abajo y borra el setTimeout.
-            
-            /* --- INICIO CÓDIGO REAL FETCH ---
-            fetch(SCRIPT_URL, { method: 'POST', body: formData })
-                .then(response => {
-                    showToast("¡Cita agendada! Tus datos se han guardado en Google Sheets.");
-                    form.reset();
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    showToast("Hubo un error al enviar, pero simularemos el éxito por ahora.", true);
-                })
-                .finally(() => {
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-                });
-            --- FIN CÓDIGO REAL FETCH --- */
+            // ENVÍO REAL A GOOGLE SHEETS
+            // Usamos fetch en modo no-cors por la naturaleza de Google Apps Script.
+            // Para asegurar la compatibilidad con el parámetro e.parameter del script usamos URLSearchParams
+            const urlEncodedData = new URLSearchParams(formData).toString();
 
-            // SIMULACIÓN (Muestra visual para el ejercicio)
-            setTimeout(() => {
-                showToast("¡Excelente! Tus datos han sido enviados y guardados.");
+            fetch(SCRIPT_URL, { 
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: urlEncodedData 
+            })
+            .then(response => {
+                showToast("¡Cita agendada! Tus datos se han guardado.");
                 form.reset();
-                
-                // Restaurar botón
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                showToast("Revisa la consola. Asegúrate de haber puesto tu URL de Apps Script real.", true);
+            })
+            .finally(() => {
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-            }, 1500);
+            });
         });
 
         // Función para mostrar mensajes elegantes (Toast) en lugar de un alert()
