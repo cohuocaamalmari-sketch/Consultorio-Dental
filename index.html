@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Dental Sonrisa Brillante</title>
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        dental: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Animaciones suaves para la transición entre páginas */
+        .page-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .page-view.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Toast notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #10B981; /* Verde éxito */
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 50;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="bg-white shadow-md fixed w-full z-40 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
+                    <i class="fa-solid fa-tooth text-dental-600 text-3xl mr-3"></i>
+                    <span class="font-bold text-2xl text-dental-900 tracking-tight">Sonrisa<span class="text-dental-500">Brillante</span></span>
+                </div>
+                
+                <!-- Menú Desktop -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="navigateTo('home')" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors font-semibold text-dental-600 border-b-2 border-dental-600 pb-1" data-target="home">Inicio</button>
+                    <button onclick="navigateTo('about')" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent" data-target="about">Nosotros</button>
+                    <button onclick="navigateTo('services')" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent" data-target="services">Servicios</button>
+                    <button onclick="navigateTo('products')" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent" data-target="products">Productos</button>
+                    <button onclick="navigateTo('appointment')" class="bg-dental-600 hover:bg-dental-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-sm">Agendar Cita</button>
+                </div>
+
+                <!-- Botón Menú Móvil -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-dental-600 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <button onclick="navigateTo('home')" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Inicio</button>
+                <button onclick="navigateTo('about')" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Nosotros</button>
+                <button onclick="navigateTo('services')" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Servicios</button>
+                <button onclick="navigateTo('products')" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Productos</button>
+                <button onclick="navigateTo('appointment')" class="block w-full text-center mt-4 bg-dental-600 text-white px-3 py-3 rounded-md font-medium">Agendar Cita</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal (Espacio para el navbar fijo) -->
+    <main class="flex-grow pt-20">
+
+        <!-- ================= PÁGINA 1: INICIO ================= -->
+        <section id="home" class="page-view active">
+            <!-- Hero Section -->
+            <div class="relative bg-white overflow-hidden">
+                <div class="max-w-7xl mx-auto">
+                    <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-16 lg:pt-24 px-4 sm:px-6 lg:px-8">
+                        <div class="sm:text-center lg:text-left">
+                            <h1 class="text-4xl tracking-tight font-extrabold text-slate-900 sm:text-5xl md:text-6xl">
+                                <span class="block xl:inline">Tu sonrisa ideal es</span>
+                                <span class="block text-dental-600">nuestra prioridad</span>
+                            </h1>
+                            <p class="mt-3 text-base text-slate-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                                Ofrecemos tratamientos dentales de vanguardia en un ambiente relajado y profesional. Especialistas en hacerte sonreír con confianza.
+                            </p>
+                            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                                <div class="rounded-md shadow">
+                                    <button onclick="navigateTo('appointment')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-dental-600 hover:bg-dental-700 md:py-4 md:text-lg transition-colors">
+                                        Reservar Consulta
+                                    </button>
+                                </div>
+                                <div class="mt-3 sm:mt-0 sm:ml-3">
+                                    <button onclick="navigateTo('services')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-dental-700 bg-dental-100 hover:bg-dental-200 md:py-4 md:text-lg transition-colors">
+                                        Ver Servicios
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+                    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="" onerror="this.src='https://via.placeholder.com/800x600?text=Clínica+Dental'">
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="py-16 bg-slate-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-dental-100 text-dental-600 mb-6">
+                                <i class="fa-solid fa-user-doctor text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Especialistas Expertos</h3>
+                            <p class="text-slate-600">Contamos con un equipo de odontólogos altamente capacitados en diversas especialidades.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-dental-100 text-dental-600 mb-6">
+                                <i class="fa-solid fa-microscope text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Tecnología Avanzada</h3>
+                            <p class="text-slate-600">Equipos de última generación para diagnósticos precisos y tratamientos indoloros.</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-dental-100 text-dental-600 mb-6">
+                                <i class="fa-regular fa-calendar-check text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Citas Flexibles</h3>
+                            <p class="text-slate-600">Nos adaptamos a tu horario. Ofrecemos consultas en fines de semana y emergencias.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PÁGINA 2: NOSOTROS ================= -->
+        <section id="about" class="page-view">
+            <div class="bg-dental-600 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-extrabold sm:text-4xl">Sobre Nosotros</h2>
+                    <p class="mt-4 text-lg text-dental-100 max-w-2xl mx-auto">Conoce la historia y el equipo detrás de las mejores sonrisas de la ciudad.</p>
+                </div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="" class="rounded-2xl shadow-lg w-full object-cover h-96" onerror="this.src='https://via.placeholder.com/800x600?text=Equipo+Médico'">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-slate-900 mb-6">Más de 15 años cuidando tu salud dental</h3>
+                        <p class="text-slate-600 mb-4 leading-relaxed">
+                            Fundada en 2010, la <strong>Clínica Dental Sonrisa Brillante</strong> nació con la misión de cambiar la percepción de la visita al dentista. Creemos que el cuidado dental no debe ser doloroso ni estresante, sino una experiencia renovadora.
+                        </p>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            Nuestro enfoque se basa en la odontología preventiva y conservadora. Nos tomamos el tiempo para escuchar a cada paciente, entender sus preocupaciones y diseñar un plan de tratamiento personalizado que se ajuste a sus necesidades y presupuesto.
+                        </p>
+                        <div class="flex flex-col space-y-3">
+                            <div class="flex items-center text-slate-700">
+                                <i class="fa-solid fa-check-circle text-dental-500 mr-3"></i> <span>Trato humano y cálido.</span>
+                            </div>
+                            <div class="flex items-center text-slate-700">
+                                <i class="fa-solid fa-check-circle text-dental-500 mr-3"></i> <span>Materiales de la más alta calidad y biocompatibles.</span>
+                            </div>
+                            <div class="flex items-center text-slate-700">
+                                <i class="fa-solid fa-check-circle text-dental-500 mr-3"></i> <span>Estricto protocolo de esterilización e higiene.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PÁGINA 3: SERVICIOS ================= -->
+        <section id="services" class="page-view">
+            <div class="bg-dental-600 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-extrabold sm:text-4xl">Nuestros Servicios</h2>
+                    <p class="mt-4 text-lg text-dental-100 max-w-2xl mx-auto">Soluciones integrales para todas tus necesidades dentales, estéticas y funcionales.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Servicio 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1598256989800-fea5ce5146ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="[Image of Limpieza Dental]" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/600x400?text=Limpieza'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Limpieza y Prevención</h3>
+                            <p class="text-slate-600 mb-4">Profilaxis dental completa, remoción de sarro y aplicación de flúor para mantener tus encías y dientes sanos.</p>
+                            <button onclick="preSelectService('Limpieza')" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Servicio 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/600x400?text=Blanqueamiento'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Blanqueamiento Dental</h3>
+                            <p class="text-slate-600 mb-4">Aclara el tono de tus dientes con nuestra tecnología láser de vanguardia, sin dañar el esmalte ni causar sensibilidad excesiva.</p>
+                            <button onclick="preSelectService('Blanqueamiento')" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/600x400?text=Ortodoncia'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Ortodoncia</h3>
+                            <p class="text-slate-600 mb-4">Alineación dental mediante brackets tradicionales, estéticos (zafiro) o alineadores invisibles (Invisalign).</p>
+                            <button onclick="preSelectService('Ortodoncia')" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 4 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/600x400?text=Implantes'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Implantes Dentales</h3>
+                            <p class="text-slate-600 mb-4">Recupera la funcionalidad y estética de tu boca con implantes de titanio de alta durabilidad y apariencia natural.</p>
+                            <button onclick="preSelectService('Implantes')" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 5 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1588776813677-77ecdfaf264e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/600x400?text=Endodoncia'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Endodoncia</h3>
+                            <p class="text-slate-600 mb-4">Tratamiento de conductos sin dolor para salvar piezas dentales gravemente dañadas o infectadas.</p>
+                            <button onclick="preSelectService('Endodoncia')" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 6 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <div class="w-full h-48 bg-dental-100 flex items-center justify-center">
+                             <i class="fa-solid fa-tooth text-6xl text-dental-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Odontopediatría</h3>
+                            <p class="text-slate-600 mb-4">Cuidado dental especializado para niños, creando hábitos saludables desde temprana edad en un entorno amigable.</p>
+                            <button onclick="preSelectService('Odontopediatria')" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PÁGINA 4: PRODUCTOS ================= -->
+        <section id="products" class="page-view">
+            <div class="bg-dental-600 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-extrabold sm:text-4xl">Nuestra Tienda</h2>
+                    <p class="mt-4 text-lg text-dental-100 max-w-2xl mx-auto">Productos especializados recomendados por nuestros expertos para tu rutina en casa.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Producto 1 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="h-40 w-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-toothbrush text-5xl text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Cepillo Eléctrico SonicPro</h3>
+                        <p class="text-sm text-slate-500 mb-4">Elimina hasta un 100% más de placa que un cepillo manual.</p>
+                        <span class="text-xl font-bold text-dental-600 mb-4">$1,200 MXN</span>
+                        <p class="text-xs text-slate-400 mt-auto">Adquiérelo en clínica</p>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="h-40 w-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-pump-medical text-5xl text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Enjuague Bucal Clínico</h3>
+                        <p class="text-sm text-slate-500 mb-4">Fórmula sin alcohol, ideal para encías sensibles.</p>
+                        <span class="text-xl font-bold text-dental-600 mb-4">$250 MXN</span>
+                        <p class="text-xs text-slate-400 mt-auto">Adquiérelo en clínica</p>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="h-40 w-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-box-open text-5xl text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Kit de Blanqueamiento en Casa</h3>
+                        <p class="text-sm text-slate-500 mb-4">Férulas personalizadas y gel blanqueador profesional.</p>
+                        <span class="text-xl font-bold text-dental-600 mb-4">$1,500 MXN</span>
+                        <p class="text-xs text-slate-400 mt-auto">Adquiérelo en clínica</p>
+                    </div>
+
+                    <!-- Producto 4 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="h-40 w-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-shapes text-5xl text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Hilo Dental Ecológico</h3>
+                        <p class="text-sm text-slate-500 mb-4">Hecho de fibra de bambú, biodegradable y con sabor a menta.</p>
+                        <span class="text-xl font-bold text-dental-600 mb-4">$80 MXN</span>
+                        <p class="text-xs text-slate-400 mt-auto">Adquiérelo en clínica</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PÁGINA 5: AGENDAR CITA (FORMULARIO) ================= -->
+        <section id="appointment" class="page-view">
+            <div class="bg-slate-50 py-16">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="bg-dental-600 p-6 sm:p-10 text-white text-center">
+                            <h2 class="text-3xl font-extrabold mb-2">Reserva tu Consulta</h2>
+                            <p class="text-dental-100">Completa el formulario y nos pondremos en contacto contigo para confirmar el horario.</p>
+                        </div>
+                        
+                        <div class="p-6 sm:p-10">
+                            <!-- 
+                                Formulario para Google Sheets 
+                                Este formulario es interceptado por JavaScript para enviar los datos vía POST (fetch)
+                            -->
+                            <form id="appointment-form" class="space-y-6">
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="nombre" class="block text-sm font-medium text-slate-700">Nombre Completo <span class="text-red-500">*</span></label>
+                                        <input type="text" name="nombre" id="nombre" required class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-dental-500 focus:border-dental-500">
+                                    </div>
+                                    <div>
+                                        <label for="telefono" class="block text-sm font-medium text-slate-700">Teléfono <span class="text-red-500">*</span></label>
+                                        <input type="tel" name="telefono" id="telefono" required class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-dental-500 focus:border-dental-500">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-slate-700">Correo Electrónico <span class="text-red-500">*</span></label>
+                                    <input type="email" name="email" id="email" required class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-dental-500 focus:border-dental-500">
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="fecha" class="block text-sm font-medium text-slate-700">Fecha Preferida <span class="text-red-500">*</span></label>
+                                        <input type="date" name="fecha" id="fecha" required class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-dental-500 focus:border-dental-500">
+                                    </div>
+                                    <div>
+                                        <label for="servicio" class="block text-sm font-medium text-slate-700">Servicio de Interés <span class="text-red-500">*</span></label>
+                                        <select id="servicio" name="servicio" required class="mt-1 block w-full border border-slate-300 bg-white rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-dental-500 focus:border-dental-500">
+                                            <option value="" disabled selected>Selecciona una opción</option>
+                                            <option value="Consulta General">Consulta General / Valoración</option>
+                                            <option value="Limpieza">Limpieza Dental</option>
+                                            <option value="Blanqueamiento">Blanqueamiento</option>
+                                            <option value="Ortodoncia">Ortodoncia (Brackets/Invisalign)</option>
+                                            <option value="Implantes">Implantes Dentales</option>
+                                            <option value="Endodoncia">Endodoncia</option>
+                                            <option value="Odontopediatria">Odontopediatría</option>
+                                            <option value="Otro">Otro / No estoy seguro</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="mensaje" class="block text-sm font-medium text-slate-700">Mensaje o Síntomas (Opcional)</label>
+                                    <textarea id="mensaje" name="mensaje" rows="4" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-dental-500 focus:border-dental-500"></textarea>
+                                </div>
+
+                                <div>
+                                    <button type="submit" id="submit-btn" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-dental-600 hover:bg-dental-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-dental-500 transition-colors">
+                                        Confirmar Cita
+                                    </button>
+                                </div>
+                                <p class="text-xs text-center text-slate-500 mt-4">
+                                    * Los datos serán guardados de forma segura para gestionar su cita.
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa-solid fa-tooth text-dental-500 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-white tracking-tight">Sonrisa<span class="text-dental-500">Brillante</span></span>
+                    </div>
+                    <p class="text-sm">Transformando vidas, una sonrisa a la vez. Tu clínica dental de confianza con especialistas altamente calificados.</p>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-2 text-dental-500"></i> Av. Principal 123, Centro Médico, Ciudad</li>
+                        <li class="flex items-center"><i class="fa-solid fa-phone mr-2 text-dental-500"></i> +52 (55) 1234-5678</li>
+                        <li class="flex items-center"><i class="fa-solid fa-envelope mr-2 text-dental-500"></i> citas@sonrisabrillante.com</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-4">Horario</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex justify-between border-b border-slate-700 pb-1"><span>Lunes - Viernes:</span> <span>9:00 AM - 7:00 PM</span></li>
+                        <li class="flex justify-between border-b border-slate-700 pb-1"><span>Sábados:</span> <span>9:00 AM - 2:00 PM</span></li>
+                        <li class="flex justify-between pb-1"><span>Domingos:</span> <span class="text-dental-500 font-semibold">Urgencias</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2024 Clínica Dental Sonrisa Brillante. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Elemento para notificaciones (Toast) -->
+    <div id="toast">
+        <i class="fa-solid fa-circle-check mr-2"></i>
+        <span id="toast-message">Mensaje de éxito</span>
+    </div>
+
+    <!-- Scripts para lógica de la página -->
+    <script>
+        // ==========================================
+        // LÓGICA DE NAVEGACIÓN (SINGLE PAGE APP)
+        // ==========================================
+        function navigateTo(pageId) {
+            // Ocultar todas las páginas
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Mostrar la página solicitada
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // Actualizar estilo de los enlaces en la barra de navegación (desktop)
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.dataset.target === pageId) {
+                    link.classList.add('font-semibold', 'text-dental-600', 'border-dental-600');
+                    link.classList.remove('text-slate-600', 'border-transparent');
+                } else {
+                    link.classList.remove('font-semibold', 'text-dental-600', 'border-dental-600');
+                    link.classList.add('text-slate-600', 'border-transparent');
+                }
+            });
+
+            // Cerrar menú móvil si está abierto
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+
+            // Hacer scroll hacia arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Pre-seleccionar servicio desde la página de servicios hacia el formulario
+        function preSelectService(serviceValue) {
+            navigateTo('appointment');
+            const selectElement = document.getElementById('servicio');
+            if(selectElement) {
+                selectElement.value = serviceValue;
+            }
+        }
+
+        // Toggle del menú móvil
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // ==========================================
+        // LÓGICA DE FORMULARIO A GOOGLE SHEETS
+        // ==========================================
+        
+        /* INSTRUCCIONES PARA CONECTAR REALMENTE CON GOOGLE SHEETS:
+           1. Ve a Google Drive -> Nuevo -> Google Sheets.
+           2. Crea las columnas: Timestamp, Nombre, Telefono, Email, Fecha, Servicio, Mensaje.
+           3. Extensiones -> Apps Script.
+           4. Pega este código en el script:
+              
+              function doPost(e) {
+                var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+                var newRow = [
+                  new Date(),
+                  e.parameter.nombre,
+                  e.parameter.telefono,
+                  e.parameter.email,
+                  e.parameter.fecha,
+                  e.parameter.servicio,
+                  e.parameter.mensaje
+                ];
+                sheet.appendRow(newRow);
+                return ContentService.createTextOutput("Exito").setMimeType(ContentService.MimeType.TEXT);
+              }
+
+           5. Clic en "Implementar" -> "Nueva implementación".
+           6. Tipo: "Aplicación web". Ejecutar como: "Tú". Acceso: "Cualquier persona".
+           7. Copia la "URL de la aplicación web" y pégala abajo en la variable SCRIPT_URL.
+        */
+
+        // >>> REEMPLAZA ESTA URL CON TU URL DE APPS SCRIPT <<<
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxecBeAhmDIeT62v7rJAm-X6pYjxNxeiPxRODOu094f1VgyH4-AhAnH_C81HlxsjKPk/exec"; 
+
+        const form = document.getElementById('appointment-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir recarga de página
+
+            // Cambiar estado del botón
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Enviando...';
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            // Recopilar datos del formulario
+            const formData = new FormData(form);
+
+            // SIMULACIÓN O ENVÍO REAL
+            // Si has configurado el SCRIPT_URL real, descomenta el bloque fetch de abajo y borra el setTimeout.
+            
+            /* --- INICIO CÓDIGO REAL FETCH ---
+            fetch(SCRIPT_URL, { method: 'POST', body: formData })
+                .then(response => {
+                    showToast("¡Cita agendada! Tus datos se han guardado en Google Sheets.");
+                    form.reset();
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    showToast("Hubo un error al enviar, pero simularemos el éxito por ahora.", true);
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                });
+            --- FIN CÓDIGO REAL FETCH --- */
+
+            // SIMULACIÓN (Muestra visual para el ejercicio)
+            setTimeout(() => {
+                showToast("¡Excelente! Tus datos han sido enviados y guardados.");
+                form.reset();
+                
+                // Restaurar botón
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }, 1500);
+        });
+
+        // Función para mostrar mensajes elegantes (Toast) en lugar de un alert()
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            
+            if (isError) {
+                toast.style.backgroundColor = '#EF4444'; // Rojo error
+                toast.querySelector('i').className = 'fa-solid fa-circle-exclamation mr-2';
+            } else {
+                toast.style.backgroundColor = '#10B981'; // Verde éxito
+                toast.querySelector('i').className = 'fa-solid fa-circle-check mr-2';
+            }
+
+            toast.classList.add('show');
+
+            // Ocultar después de 4 segundos
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // Restringir la fecha del formulario para que sea de hoy en adelante
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const dateInput = document.getElementById('fecha');
+            if(dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+            }
+        });
+    </script>
+</body>
+</html>
