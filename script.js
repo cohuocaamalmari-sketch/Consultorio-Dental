@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('appointment-form');
     if (form) {
         const submitBtn = document.getElementById('submit-btn');
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxecBeAhmDIeT62v7rJAm-X6pYjxNxeiPxRODOu094f1VgyH4-AhAnH_C81HlxsjKPk/exec"; 
+        const SCRIPT_URL = "https://script.google.com/macros/s/TU_SCRIPT_ID/exec"; 
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();

@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica Dental Sonrisa Brillante - Agendar Cita</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script>
         tailwind.config = {
             theme: {
@@ -30,18 +31,18 @@
     <nav class="bg-white shadow-md fixed w-full z-40 top-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
-                <a href="/" class="flex items-center cursor-pointer">
+                <a href="index.html" class="flex items-center cursor-pointer">
                     <i class="fa-solid fa-tooth text-dental-600 text-3xl mr-3"></i>
                     <span class="font-bold text-2xl text-dental-900 tracking-tight">Sonrisa<span class="text-dental-500">Brillante</span></span>
                 </a>
                 
                 <!-- Menú Desktop -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Inicio</a>
-                    <a href="/nosotros" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Nosotros</a>
-                    <a href="/servicios" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Servicios</a>
-                    <a href="/productos" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Productos</a>
-                    <a href="/agendar" class="bg-dental-600 hover:bg-dental-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-sm">Agendar Cita</a>
+                    <a href="index.html" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Inicio</a>
+                    <a href="nosotros.html" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Nosotros</a>
+                    <a href="servicios.html" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Servicios</a>
+                    <a href="productos.html" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Productos</a>
+                    <a href="agendar.html" class="bg-dental-600 hover:bg-dental-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-sm">Agendar Cita</a>
                 </div>
 
                 <!-- Botón Menú Móvil -->
@@ -56,11 +57,11 @@
         <!-- Menú Móvil Desplegable -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full">
             <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="/" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Inicio</a>
-                <a href="/nosotros" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Nosotros</a>
-                <a href="/servicios" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Servicios</a>
-                <a href="/productos" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Productos</a>
-                <a href="/agendar" class="block w-full text-center mt-4 bg-dental-600 text-white px-3 py-3 rounded-md font-medium">Agendar Cita</a>
+                <a href="index.html" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Inicio</a>
+                <a href="nosotros.html" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Nosotros</a>
+                <a href="servicios.html" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Servicios</a>
+                <a href="productos.html" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Productos</a>
+                <a href="agendar.html" class="block w-full text-center mt-4 bg-dental-600 text-white px-3 py-3 rounded-md font-medium">Agendar Cita</a>
             </div>
         </div>
     </nav>
@@ -179,6 +180,6 @@
         <span id="toast-message">Mensaje de éxito</span>
     </div>
 
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

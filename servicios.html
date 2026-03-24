@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Dental Sonrisa Brillante - Servicios</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        dental: {
+                            50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9',
+                            600: '#0284c7', 700: '#0369a1', 900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="bg-white shadow-md fixed w-full z-40 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <a href="index.html" class="flex items-center cursor-pointer">
+                    <i class="fa-solid fa-tooth text-dental-600 text-3xl mr-3"></i>
+                    <span class="font-bold text-2xl text-dental-900 tracking-tight">Sonrisa<span class="text-dental-500">Brillante</span></span>
+                </a>
+                
+                <!-- Menú Desktop -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Inicio</a>
+                    <a href="nosotros.html" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Nosotros</a>
+                    <a href="servicios.html" class="nav-link font-semibold text-dental-600 border-b-2 border-dental-600 pb-1">Servicios</a>
+                    <a href="productos.html" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Productos</a>
+                    <a href="agendar.html" class="bg-dental-600 hover:bg-dental-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-sm">Agendar Cita</a>
+                </div>
+
+                <!-- Botón Menú Móvil -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-dental-600 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="index.html" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Inicio</a>
+                <a href="nosotros.html" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Nosotros</a>
+                <a href="servicios.html" class="block w-full text-left px-3 py-3 text-base font-medium text-dental-600 bg-slate-50 rounded-md">Servicios</a>
+                <a href="productos.html" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Productos</a>
+                <a href="agendar.html" class="block w-full text-center mt-4 bg-dental-600 text-white px-3 py-3 rounded-md font-medium">Agendar Cita</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <main class="flex-grow pt-20">
+        <section class="page-view">
+            <div class="bg-dental-600 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-extrabold sm:text-4xl">Nuestros Servicios</h2>
+                    <p class="mt-4 text-lg text-dental-100 max-w-2xl mx-auto">Soluciones integrales para todas tus necesidades dentales, estéticas y funcionales.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Servicio 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1598256989800-fea5ce5146ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Limpieza Dental" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Limpieza'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Limpieza y Prevención</h3>
+                            <p class="text-slate-600 mb-4">Profilaxis dental completa, remoción de sarro y aplicación de flúor para mantener tus encías y dientes sanos.</p>
+                            <a href="agendar.html?servicio=Limpieza" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center cursor-pointer">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Servicio 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Blanqueamiento" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Blanqueamiento'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Blanqueamiento Dental</h3>
+                            <p class="text-slate-600 mb-4">Aclara el tono de tus dientes con nuestra tecnología láser de vanguardia, sin dañar el esmalte ni causar sensibilidad excesiva.</p>
+                            <a href="agendar.html?servicio=Blanqueamiento" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center cursor-pointer">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ortodoncia" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Ortodoncia'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Ortodoncia</h3>
+                            <p class="text-slate-600 mb-4">Alineación dental mediante brackets tradicionales, estéticos (zafiro) o alineadores invisibles (Invisalign).</p>
+                            <a href="/agendar?servicio=Ortodoncia" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center cursor-pointer">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 4 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Implantes Dentales" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Implantes'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Implantes Dentales</h3>
+                            <p class="text-slate-600 mb-4">Recupera la funcionalidad y estética de tu boca con implantes de titanio de alta durabilidad y apariencia natural.</p>
+                            <a href="/agendar?servicio=Implantes" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center cursor-pointer">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 5 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <img src="https://images.unsplash.com/photo-1588776813677-77ecdfaf264e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Endodoncia" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Endodoncia'">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Endodoncia</h3>
+                            <p class="text-slate-600 mb-4">Tratamiento de conductos sin dolor para salvar piezas dentales gravemente dañadas o infectadas.</p>
+                            <a href="/agendar?servicio=Endodoncia" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center cursor-pointer">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Servicio 6 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg transition-shadow group">
+                        <div class="w-full h-48 bg-dental-100 flex items-center justify-center">
+                             <i class="fa-solid fa-tooth text-6xl text-dental-300"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Odontopediatría</h3>
+                            <p class="text-slate-600 mb-4">Cuidado dental especializado para niños, creando hábitos saludables desde temprana edad en un entorno amigable.</p>
+                            <a href="/agendar?servicio=Odontopediatria" class="text-dental-600 font-semibold hover:text-dental-800 flex items-center cursor-pointer">
+                                Agendar este servicio <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa-solid fa-tooth text-dental-500 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-white tracking-tight">Sonrisa<span class="text-dental-500">Brillante</span></span>
+                    </div>
+                    <p class="text-sm">Transformando vidas, una sonrisa a la vez. Tu clínica dental de confianza con especialistas altamente calificados.</p>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-2 text-dental-500"></i> Av. Principal 123, Centro Médico, Ciudad</li>
+                        <li class="flex items-center"><i class="fa-solid fa-phone mr-2 text-dental-500"></i> +52 (55) 1234-5678</li>
+                        <li class="flex items-center"><i class="fa-solid fa-envelope mr-2 text-dental-500"></i> citas@sonrisabrillante.com</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-bold mb-4">Horario</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex justify-between border-b border-slate-700 pb-1"><span>Lunes - Viernes:</span> <span>9:00 AM - 7:00 PM</span></li>
+                        <li class="flex justify-between border-b border-slate-700 pb-1"><span>Sábados:</span> <span>9:00 AM - 2:00 PM</span></li>
+                        <li class="flex justify-between pb-1"><span>Domingos:</span> <span class="text-dental-500 font-semibold">Urgencias</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2024 Clínica Dental Sonrisa Brillante. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
