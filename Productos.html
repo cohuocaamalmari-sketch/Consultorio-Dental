@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica Dental Sonrisa Brillante - Inicio</title>
+    <title>Clínica Dental Sonrisa Brillante - Productos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -37,10 +37,10 @@
                 
                 <!-- Menú Desktop -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="nav-link font-semibold text-dental-600 border-b-2 border-dental-600 pb-1">Inicio</a>
+                    <a href="/" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Inicio</a>
                     <a href="/nosotros" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Nosotros</a>
                     <a href="/servicios" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Servicios</a>
-                    <a href="/productos" class="nav-link text-slate-600 hover:text-dental-600 font-medium transition-colors pb-1 border-b-2 border-transparent">Productos</a>
+                    <a href="/productos" class="nav-link font-semibold text-dental-600 border-b-2 border-dental-600 pb-1">Productos</a>
                     <a href="/agendar" class="bg-dental-600 hover:bg-dental-700 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-sm">Agendar Cita</a>
                 </div>
 
@@ -56,10 +56,10 @@
         <!-- Menú Móvil Desplegable -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full">
             <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="/" class="block w-full text-left px-3 py-3 text-base font-medium text-dental-600 bg-slate-50 rounded-md">Inicio</a>
+                <a href="/" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Inicio</a>
                 <a href="/nosotros" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Nosotros</a>
                 <a href="/servicios" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Servicios</a>
-                <a href="/productos" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:text-dental-600 hover:bg-slate-50 rounded-md">Productos</a>
+                <a href="/productos" class="block w-full text-left px-3 py-3 text-base font-medium text-dental-600 bg-slate-50 rounded-md">Productos</a>
                 <a href="/agendar" class="block w-full text-center mt-4 bg-dental-600 text-white px-3 py-3 rounded-md font-medium">Agendar Cita</a>
             </div>
         </div>
@@ -68,63 +68,57 @@
     <!-- Contenedor Principal -->
     <main class="flex-grow pt-20">
         <section class="page-view">
-            <!-- Hero Section -->
-            <div class="relative bg-white overflow-hidden">
-                <div class="max-w-7xl mx-auto">
-                    <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-16 lg:pt-24 px-4 sm:px-6 lg:px-8">
-                        <div class="sm:text-center lg:text-left">
-                            <h1 class="text-4xl tracking-tight font-extrabold text-slate-900 sm:text-5xl md:text-6xl">
-                                <span class="block xl:inline">Tu sonrisa ideal es</span>
-                                <span class="block text-dental-600">nuestra prioridad</span>
-                            </h1>
-                            <p class="mt-3 text-base text-slate-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                Ofrecemos tratamientos dentales de vanguardia en un ambiente relajado y profesional. Especialistas en hacerte sonreír con confianza.
-                            </p>
-                            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                <div class="rounded-md shadow">
-                                    <a href="/agendar" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-dental-600 hover:bg-dental-700 md:py-4 md:text-lg transition-colors">
-                                        Reservar Consulta
-                                    </a>
-                                </div>
-                                <div class="mt-3 sm:mt-0 sm:ml-3">
-                                    <a href="/servicios" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-dental-700 bg-dental-100 hover:bg-dental-200 md:py-4 md:text-lg transition-colors">
-                                        Ver Servicios
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="" onerror="this.onerror=null; this.src='https://placehold.co/800x600?text=Clinica+Dental'">
+            <div class="bg-dental-600 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-extrabold sm:text-4xl">Nuestra Tienda</h2>
+                    <p class="mt-4 text-lg text-dental-100 max-w-2xl mx-auto">Productos especializados recomendados por nuestros expertos para tu rutina en casa.</p>
                 </div>
             </div>
 
-            <!-- Features -->
-            <div class="py-16 bg-slate-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-dental-100 text-dental-600 mb-6">
-                                <i class="fa-solid fa-user-doctor text-2xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3">Especialistas Expertos</h3>
-                            <p class="text-slate-600">Contamos con un equipo de odontólogos altamente capacitados en diversas especialidades.</p>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Producto 1 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="h-40 w-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-toothbrush text-5xl text-slate-400"></i>
                         </div>
-                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-dental-100 text-dental-600 mb-6">
-                                <i class="fa-solid fa-microscope text-2xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3">Tecnología Avanzada</h3>
-                            <p class="text-slate-600">Equipos de última generación para diagnósticos precisos y tratamientos indoloros.</p>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Cepillo Eléctrico SonicPro</h3>
+                        <p class="text-sm text-slate-500 mb-4">Elimina hasta un 100% más de placa que un cepillo manual.</p>
+                        <span class="text-xl font-bold text-dental-600 mb-4">$1,200 MXN</span>
+                        <p class="text-xs text-slate-400 mt-auto">Adquiérelo en clínica</p>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="h-40 w-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-pump-medical text-5xl text-slate-400"></i>
                         </div>
-                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-dental-100 text-dental-600 mb-6">
-                                <i class="fa-regular fa-calendar-check text-2xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-3">Citas Flexibles</h3>
-                            <p class="text-slate-600">Nos adaptamos a tu horario. Ofrecemos consultas en fines de semana y emergencias.</p>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Enjuague Bucal Clínico</h3>
+                        <p class="text-sm text-slate-500 mb-4">Fórmula sin alcohol, ideal para encías sensibles.</p>
+                        <span class="text-xl font-bold text-dental-600 mb-4">$250 MXN</span>
+                        <p class="text-xs text-slate-400 mt-auto">Adquiérelo en clínica</p>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="h-40 w-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-box-open text-5xl text-slate-400"></i>
                         </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Kit de Blanqueamiento en Casa</h3>
+                        <p class="text-sm text-slate-500 mb-4">Férulas personalizadas y gel blanqueador profesional.</p>
+                        <span class="text-xl font-bold text-dental-600 mb-4">$1,500 MXN</span>
+                        <p class="text-xs text-slate-400 mt-auto">Adquiérelo en clínica</p>
+                    </div>
+
+                    <!-- Producto 4 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="h-40 w-full flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-shapes text-5xl text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">Hilo Dental Ecológico</h3>
+                        <p class="text-sm text-slate-500 mb-4">Hecho de fibra de bambú, biodegradable y con sabor a menta.</p>
+                        <span class="text-xl font-bold text-dental-600 mb-4">$80 MXN</span>
+                        <p class="text-xs text-slate-400 mt-auto">Adquiérelo en clínica</p>
                     </div>
                 </div>
             </div>
